@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<launch>
+
+	<!-- Set namespace -->
+	<!--arg name="id_robot" default="robot"/-->
+
+	<!-- Desired frequency -->
+	<arg name="desired_freq" default="10.0" />
+	<!-- Name of the example of a subscriber -->
+	<arg name="gps_topic_name" default="gps/fix"/>
+	<arg name="base_frame" default="robot_base_link"/>
+	<arg name="fixed_frame" default="robot_odom" />
+	<arg name="cmd_vel_topic_name" default="move/cmd_vel" />
+	<arg name="set_datum_service_name" default="navsat_transform_node/datum" />
+
+	<!-- Load .yaml example -->
+	<rosparam file="$(find navsat_datum_initializer)/config/example.yaml" command="load" />
+
+	<!--group ns="$(arg id_robot)"-->
+
+		<!-- start NavSatDatumInitializer node -->
+		<node name="navsat_datum_initializer" pkg="navsat_datum_initializer" type="datum_initializer_node.py" output="screen" respawn="false">
+			<param name="desired_freq" value="$(arg desired_freq)"/>
+			<param name="gps_topic_name" value="$(arg gps_topic_name)"/>
+			<param name="cmd_vel_topic_name" value="$(arg cmd_vel_topic_name)"/>
+			<param name="base_frame" value="$(arg base_frame)"/>
+			<param name="fixed_frame" value="$(arg fixed_frame)"/>
+			<param name="set_datum_service_name" value="$(arg set_datum_service_name)"/>
+		</node>
+
+	<!--/group-->
+
+</launch>

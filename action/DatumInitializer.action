@@ -1,0 +1,5 @@
+navsat_datum_initializer/InitializerCommand command
+---
+navsat_datum_initializer/InitializerResult result
+---
+navsat_datum_initializer/InitializerFeedback feedback
